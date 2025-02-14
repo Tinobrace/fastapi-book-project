@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          PRIVATE_KEY: ${{ secrets.GCP_SSH_PRIVATE_KEY }}
           HOSTNAME: ${{secrets.HOSTNAME}} #Public DNS
           USER_NAME: ${{secrets.USER_NAME}}
           SERVER_PUBLIC_IP: ${{secrets.SERVER_PUBLIC_IP}}
@@ -24,7 +24,7 @@ jobs:
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
-          echo "$PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+          echo "$GCP_SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $SERVER_PUBLIC_IP >> ~/.ssh/known_hosts
 
