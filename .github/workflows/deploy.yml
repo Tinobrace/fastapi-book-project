@@ -21,6 +21,8 @@ jobs:
           echo "${{ secrets.GCP_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 34.68.79.114 >> ~/.ssh/known_hosts
+          eval "$(ssh-agent -s)"  # Start SSH agent
+          ssh-add ~/.ssh/id_rsa    # Add the key
 
       # ✅ 3. Install Python & dependencies
       - name: Set up Python
