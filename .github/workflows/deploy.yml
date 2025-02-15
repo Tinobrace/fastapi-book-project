@@ -21,8 +21,8 @@ jobs:
           echo "${{ secrets.GCP_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 34.68.79.114 >> ~/.ssh/known_hosts
-          eval "$(ssh-agent -s)"  # Start SSH agent
-          ssh-add ~/.ssh/id_rsa    # Add the key
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa    
 
       # ✅ 3. Install Python & dependencies
       - name: Set up Python
@@ -42,7 +42,7 @@ jobs:
             git pull origin main
             source venv/bin/activate
             pip install -r requirements.txt
-            sudo systemctl restart fastapi-app  # Adjust if needed
+            sudo systemctl restart fastapi-app
           EOF
 
       # ✅ 5. Restart Nginx to apply changes (if using Nginx)
